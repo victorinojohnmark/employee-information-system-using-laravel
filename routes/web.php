@@ -29,3 +29,6 @@ Route::get('/dashboard', function () {
 Route::get('/person', 'PersonController@index');
 Route::get('/person/create', 'PersonController@create');
 Route::post('/person', 'PersonController@store');
+Route::get('/person/{id}', 'PersonController@show');
+Route::get('/person/{person}/edit', 'PersonController@edit');
+Route::patch('/person/{person}',['as' => 'person.update', 'uses' => 'PersonController@update']);

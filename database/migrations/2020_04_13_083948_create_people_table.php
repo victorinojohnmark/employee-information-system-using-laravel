@@ -22,6 +22,8 @@ class CreatePeopleTable extends Migration
             $table->date('birthdate');
             $table->string('profile_image', 250);
             $table->string('signature_image', 250);
+            $table->string('gender', 50);
+            $table->string('marital_status', 50);
             // ID's
             $table->string('sss_id', 250);
             $table->string('tin_id', 250);

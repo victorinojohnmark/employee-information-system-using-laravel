@@ -1,10 +1,9 @@
-{!! Form::open(['url' => 'person', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
 {{ Form::token() }}
 <div class="row">
     <div class="col-md-2 col-sm-12">
-        <img src="/img/avatar.jpg" id="profile-picture" class="img-fluid rounded" alt="Avatar Image">
+    <img src="/storage/img/profile/{{ $person->profile_image ?? 'avatar.jpg' }}" id="profile-picture" class="img-fluid rounded" alt="Avatar Image">
         {{ Form::file('profile_image', ['class' => 'form-control-file d-block mt-2', 'accept'=> 'image/x-png,image/gif,image/jpeg']) }}
-        {{ Form::hidden('old_profile_image', old('old-profile-picture')) }}
+        {{-- {{ Form::hidden('old_profile_image', old('old-profile-picture', $person->profile_image)) }} --}}
         <hr>
         {{ Form::submit('Submit', ['class' => 'btn btn-primary btn-block mt-3']) }}
         {{ Form::reset('Reset', ['class' => 'btn btn-danger btn-block mt-2']) }}
@@ -28,10 +27,24 @@
                 {{ Form::label('birthdate', 'Birth Date') }}
                 {{ Form::date('birthdate',  old('birthdate'), ['class' => 'form-control', 'placeholder' => 'Perez', 'autocomplete' => 'off']) }}
             </div>
+            <div class="form-group col-md-2 mt-2">
+                {{ Form::label('gender', 'Gender') }}
+                @php
+                    $genderArray = ['Male' => 'Male', 'Female' => 'Female'];
+                @endphp
+                {{ Form::select('gender', $genderArray, old('gender'), ['class' => 'form-control']) }}
+            </div>
+            <div class="form-group col-md-2 mt-2">
+                {{ Form::label('marital_status', 'Marital Status') }}
+                @php
+                    $maritalArray = ['Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced', 'Separated' => 'Separated', 'Widowed' => 'Widowed'];
+                @endphp
+                {{ Form::select('marital_status', $maritalArray, old('marital_status'), ['class' => 'form-control']) }}
+            </div>
             <div class="form-group col-md-4 mt-2">
                 {{ Form::label('image', 'Signature File') }}
                 {{ Form::file('signature_image', ['class' => 'form-control-file', 'accept'=>"image/x-png,image/gif,image/jpeg"]) }}
-                {{ Form::hidden('old_signature_image', old('old-signature-file')) }}
+                {{-- {{ Form::hidden('old_signature_image', old('old-signature-file', $person->signature_image)) }} --}}
             </div>
 
             <small class="col-md-12 text-black-50"><i class="fas fa-info-circle"></i> Please leave 'N/A' if data not
@@ -59,22 +72,21 @@
                 <div class="row">
                     <div class="form-group col-md-6 mt-2">
                         {{ Form::label('email', 'Personal Email') }}
-                        {{ Form::email('email', old('email'), ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                        {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'john@email.com', 'autocomplete' => 'off']) }}
                     </div>
                     <div class="form-group col-md-6 mt-2">
                         {{ Form::label('contact_no', 'Contact No') }}
-                        {{ Form::text('contact_no', old('contact_no'), ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                        {{ Form::text('contact_no', old('contact_no'), ['class' => 'form-control', 'placeholder' => '0906-123-7845', 'autocomplete' => 'off']) }}
                     </div>
                     <div class="form-group col-md-12 mt-2">
                         {{ Form::label('address', 'Address') }}
-                        {{ Form::textarea('address', old('address'), ['class' => 'form-control', 'autocomplete' => 'off', 'rows' => 4]) }}
+                        {{ Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Your address..', 'autocomplete' => 'off', 'rows' => 4]) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{!! Form::close() !!}
 
 <script>
     const profilePic = document.querySelector('#profile-picture');
@@ -93,7 +105,7 @@
     });
 
     profilePic.addEventListener('error', () => {
-        this.src = '/img/avatar-error.jpg';
+        this.src = '/storage/img/profile/avatar-error.jpg';
     });
 
 </script>
