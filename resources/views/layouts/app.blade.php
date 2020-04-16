@@ -117,10 +117,26 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <!-- Menu Toggle Script -->
     <script>
+        // toggle sidemenu
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+
+        //toggle chevron icon
+        const listGroupToggle = document.querySelectorAll('.list-group-toggle');
+        listGroupToggle.forEach(list => {
+            list.addEventListener('click', (e) => {
+                // console.log(e.target.firstElementChild);
+                if(e.target.firstElementChild.classList.contains('fa-chevron-circle-right')) {
+                    e.target.firstElementChild.classList.remove('fa-chevron-circle-right');
+                    e.target.firstElementChild.classList.add('fa-chevron-circle-down');
+                } else {
+                    e.target.firstElementChild.classList.remove('fa-chevron-circle-down');
+                    e.target.firstElementChild.classList.add('fa-chevron-circle-right');
+                }
+            })
+        })
 
     </script>
 </body>

@@ -104,8 +104,9 @@
 
     });
 
-    profilePic.addEventListener('error', () => {
-        this.src = '/storage/img/profile/avatar-error.jpg';
+    profilePic.addEventListener('error', (e) => {
+        e.target.src = '/storage/img/profile/avatar-error.jpg';
+        // console.log(e.target);
     });
 
 </script>

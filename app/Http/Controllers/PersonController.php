@@ -8,14 +8,14 @@ use App\Person;
 class PersonController extends Controller
 {
     public function index() {
-        $people = Person::orderBy('lastname', 'desc')->paginate(20);
+        $people = Person::orderBy('lastname', 'desc')->paginate(10);
         // dd($people);
-        return view('person.index', ['people' => $people]);
+        return view('people.index', ['people' => $people]);
     }
 
     public function create() {
         $person = new Person();
-        return view('person.create', ['person' => $person]);
+        return view('people.create', ['person' => $person]);
     }
 
     public function store() {
@@ -32,12 +32,12 @@ class PersonController extends Controller
 
         Person::create($data);
 
-        return redirect('/person')->with('success', 'Profile Added');
+        return redirect('/people')->with('success', 'Profile Added');
     }
 
     public function edit($person) {
         // $person = Person::findOrFail($person);
-        return view('person.edit', ['person' => Person::findOrFail($person)]);
+        return view('people.edit', ['person' => Person::findOrFail($person)]);
     }
 
     public function update(Person $person) {
@@ -61,7 +61,7 @@ class PersonController extends Controller
         // dd($data);
         $person->update($data);
 
-        return redirect('/person')->with('success', 'Profile Updated');
+        return redirect('/people')->with('success', 'Profile Updated');
     }
 
     protected function validatedData() {
@@ -100,7 +100,7 @@ class PersonController extends Controller
             // get just extension
             $fileProfileExtension = request()->file('profile_image')->getClientOriginalExtension();
             //filename to store
-            $profile_image = $fileProfile.'_'.time().'_'.$fileProfileExtension;
+            $profile_image = $fileProfile.'_'.time().'.'.$fileProfileExtension;
             //Upload Image
             $profilePath = request()->file('profile_image')->storeAs('public/img/profile', $profile_image);
         } else {

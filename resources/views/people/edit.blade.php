@@ -9,7 +9,7 @@
         <hr>
     </div>
 </div>
-{!! Form::model($person, ['route' => ['person.update', $person->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
-    @include('form.person-form')
+{!! Form::model($person, ['route' => ['people.update', $person->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
+    @include('inc.form.person-form')
 {!! Form::close() !!}
 @endsection

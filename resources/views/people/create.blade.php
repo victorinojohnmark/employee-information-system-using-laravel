@@ -9,8 +9,8 @@
         <hr>
     </div>
 </div>
-{!! Form::open(['url' => 'person', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+{!! Form::open(['url' => 'people', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
 
-    @include('form.person-form')
+    @include('inc.form.person-form')
 {!! Form::close() !!}
 @endsection

@@ -26,9 +26,31 @@ Route::get('/dashboard', function () {
 });
 
 // PERSONS
-Route::get('/person', 'PersonController@index');
-Route::get('/person/create', 'PersonController@create');
-Route::post('/person', 'PersonController@store');
-Route::get('/person/{id}', 'PersonController@show');
-Route::get('/person/{person}/edit', 'PersonController@edit');
-Route::patch('/person/{person}',['as' => 'person.update', 'uses' => 'PersonController@update']);
+Route::get('/people', 'PersonController@index');
+Route::get('/people/create', 'PersonController@create');
+Route::post('/people', 'PersonController@store');
+Route::get('/people/{id}', 'PersonController@show');
+Route::get('/people/{person}/edit', 'PersonController@edit');
+Route::patch('/people/{person}',['as' => 'people.update', 'uses' => 'PersonController@update']);
+
+//EMPLOYMENT
+// Route::get('/employees-profile', 'EmployeeProfileController@index');
+
+//DEPARTMENT & POSITION
+
+//department
+Route::get('/employee-profiles/department-position', 'DepartmentController@index');
+Route::post('/employee-profiles/department-position/department', 'DepartmentController@store');
+
+//position
+Route::post('/employee-profiles/department-position/position', 'PositionController@store');
+Route::patch('/employee-profiles/department-position/position/{position}', 'PositionController@update');
+
+//POSITION
+
+
+// //POSITION LEVEL
+// Route::get('/employee-profiles/position-levels', 'PositionLevelController@index');
+// Route::post('/employee-profiles/position-levels', 'PositionLevelController@store');
+
+
